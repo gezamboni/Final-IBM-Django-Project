@@ -92,7 +92,7 @@ class CourseDetailView(generic.DetailView):
 
 
 def enroll(request, course_id):
-    course = get_object_or_404(Course, pk=course_id)
+    course = get_object_or_404(Course,id=course_id)
     user = request.user
 
     is_enrolled = check_if_enrolled(user, course)
