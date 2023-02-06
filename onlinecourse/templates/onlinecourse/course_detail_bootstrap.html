@@ -41,37 +41,49 @@
 
     <!-- Page content -->
     <div class="container-fluid">
-            <h2>{{ course.name }}</h2>
-            <div class="card-columns-vertical">
-                {% for lesson in course.lesson_set.all %}
-                    <div class="card mt-1">
-                        <div class="card-header"><h5>Lesson {{lesson.order|add:1}}: {{lesson.title}}</h5></div>
-                        <div class="card-body">{{lesson.content}}</div>
-                    </div>
-                {% endfor %}
+        <h2>{{ course.name }}</h2>
+        <div class="card-columns-vertical">
+            {% for lesson in course.lesson_set.all %}
+                <div class="card mt-1">
+                    <div class="card-header"><h5>Lesson {{lesson.order|add:1}}: {{lesson.title}}</h5></div>
+                    <div class="card-body">{{lesson.content}}</div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Task: show questions and choices -->
+        {% if user.is_authenticated %}
+            <button type='button' class = 'btn btn-info btn-lg btn-block' data-toggle='collapse' data-target='#exam'> 
+                Start exam
+            </button>
+            <div id='exam' class = 'collapse'>
+                <form id='questionform' action = "{% url 'onlinecourse:submit' course_id %}" method = 'post'>
+                    {% for question in course.question_set.all %}
+                        <div class = 'card mt-1'>
+                            <div class = 'card-header'>
+                                <h5>{{question.text}}</h5>
+                            </div>
+                            {% csrf token %}
+                            <div class = 'form-group'>
+                                {% for choice in question.choice_set.all %}
+                                    <div class = 'form-check'>
+                                        <label class = 'form-check-label'>
+                                            <input type = 'checkbox' 
+                                                name = 'choice_{{choice_id}}' 
+                                                class = 'form-check-input' 
+                                                value = '{{choice.id}}'>{{choice.text}}
+                                        </label>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <input class = 'btn btn-success btn-block' type = 'submit' value = 'submit'>
+                </form>
             </div>
-            <!-- Task: show questions and choices -->
-            {% if user.is_authenticated %}
-                <button type='button' class = 'btn btn-info btn-lg btn-block' data-toggle='collapse' data-target='#exam'> 
-                    Start exam
-                </button>
-                <div id='exam' class = 'collapse'>
-                    <form id='questionform' action = "{% url 'onlinecourse:submit' course_id %}" method = 'post'>
-                        {% for question in course.question_set.all %}
-                            <div class = 'card mt-1'>
-                                <div class = 'card-header'>
-                                    <h5>{{question.text}}</h5>
-                                </div>
-                                {% csrf token %}
-                                <div class = 'form-group'>
-                                    {% for choice in question.choice_set.all %}
-                                        <div class = 'form-check'>
-                                            <label class = 'form-check-label'>
-                                                <input 
-                                                        type = 'checkbox' 
-                                                        name = 'choice_{{choice_id}}' 
-                                                        class = 'form-check-input' 
-                                                        value = '{{choice.id}}'>{{choice.text}}
+        {% endif %}
+    </div>
+
                                                 
 
 
@@ -122,6 +134,5 @@
 
             <!--Check here to see more details Bootstrap checkbox
              https://www.w3schools.com/bootstrap4/bootstrap_forms_inputs.asp-->
-    </div>
 </body>
 </html>
