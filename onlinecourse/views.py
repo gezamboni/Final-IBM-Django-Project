@@ -111,7 +111,7 @@ def submit(request, course_id):
     # Get user and course object, then get the associated enrollment object 
     # created when the user enrolled the course
     user = request.user
-    course = get_object_or_404(Course, pk=course_id)
+    course = get_object_or_404(Course, id=course_id)
     enrollment = Enrollment.objects.get(user = user, course = course)
 
     # Create a submission object referring to the enrollment
