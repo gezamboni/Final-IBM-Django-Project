@@ -121,7 +121,7 @@ class Question(models.Model):
     # Other fields and methods you would like to design
 class Choice(models.Model):
     # One-To-Many (or Many-To-Many if you want to reuse choices) relationship with Question
-    question =models.ForeignKey(Course, on_delete=models.CASCADE)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
     # Choice content
     choice_text = models.CharField(max_length = 100)
     # Indicate if this choice of the question is a correct one or not
