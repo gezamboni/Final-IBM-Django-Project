@@ -140,7 +140,7 @@ class Submission(models.Model):
     choices = models.ManyToManyField(Choice)
     # Other fields and methods you would like to design
     date_of_submission =  models.DateField(default = now, editable = False)
-    time_of_submission= modelsTimeField(default = now, editable = False)
+    time_of_submission= models.TimeField(default = now, editable = False)
 
     def __str__(self):
         submission_data = f"This submission was mmade on {self.date_of_submission} , Time: {self.time_of_submission} for {self.enrollment}"

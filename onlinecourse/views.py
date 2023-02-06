@@ -130,7 +130,7 @@ def submit(request, course_id):
         submission_obj.choices.add(choice_obj)
 
     submission_obj.save()
-    print(f"Exam submmited by user: {user}, in the course: {course_id})
+    print(f"Exam submmited by user: {user}, in the course: {course_id}")
 
     # Redirect to show_exam_result with the submission id
     return HttpResponseRedirect(reverse(viewname = 'onlinecourse:show_exam_result', args = (course_id, submission_obj.id)))
