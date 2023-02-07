@@ -104,7 +104,7 @@ class Question(models.Model):
     # Has question content
     question_text = models.CharField(max_length=500)
     # Has a grade point for each question
-    grade =models.IntegerField()
+    grade =models.FloatField(default = 1.0)
 
     # <HINT> A sample model method to calculate if learner get the score of the question
     def is_get_score(self, selected_ids):
