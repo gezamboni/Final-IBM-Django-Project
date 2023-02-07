@@ -52,7 +52,7 @@
         </div>
 
         <!-- Task: show questions and choices -->
-        {% if user.is_authenticated %}
+        {% if user.is_authenticated and course.question_set.count>0 %}
             <button type='button' class = 'btn btn-info btn-lg btn-block' data-toggle='collapse' data-target='#exam'> 
                 Start exam
             </button>
