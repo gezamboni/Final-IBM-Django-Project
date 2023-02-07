@@ -70,11 +70,11 @@
                                         <span class='text-danger'>Incorrect Answer: {{choice.choice_text}}</span>
                                     {% endif %}
                                 {% else %}
-                                    {% if choice.is_correct %}
-                                        <span class='text-warning'>NOT SELECTED: {{choice.choice_text}}</span>
-                                    {% else %}
+                                    <!--{% if choice.is_correct %}-->
+                                    <span class='text-warning'>NOT SELECTED: {{choice.choice_text}}</span>
+                                    <!--{% else %}
                                         {{choice.choice_text}}
-                                    {% endif %}
+                                    {% endif %}-->
                                 {% endif %}
                             </div>
                         {% endfor %}
