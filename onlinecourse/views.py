@@ -151,18 +151,18 @@ def extract_answers(request):
 # <HINT> Create an exam result view to check if learner passed exam and show their question results 
 # and result for each question, you may implement it based on the following logic:
 def show_exam_result(request, course_id, submission_id):
-    context = []
+    context = {}
     # Get course and submission based on their ids
     # Get the selected choice ids from the submission record
     course = Course.objects.get(id = course_id)
     context['course'] = course
 
     submission_choices = Submission.objects.get(id = submission_id).choices.all()
-    context['submission_choices'] = submission_choices
+    context['choices'] = submission_choices
     print('Choices of this submission: \n', submission_choices)
 
     # For each selected choice, check if it is a correct answer or not
-    questions = Question.objects.filter(courses = course_id)
+    questions = Question.objects.filter(course = course_id)
     context['questions'] = questions
     print('Questions of the exam: \n', questions)
 
