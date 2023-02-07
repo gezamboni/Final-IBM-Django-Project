@@ -177,7 +177,7 @@ def show_exam_result(request, course_id, submission_id):
         if question.is_get_score(submission_choices):
             submission_score += question.grade
 
-    context['grade'] = round(submission_score / max_score * 100))
+    context['grade'] = round(submission_score / max_score * 100)
     print('Exam grade: ', submission_score)
 
     return render(request, 'onlinecourse/exam_result_bootstrap.html', context)
